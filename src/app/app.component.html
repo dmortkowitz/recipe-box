@@ -1,3 +1,32 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <div class="jumbotron">
+    <h1>
+      {{title}}
+    </h1>
+  </div>
+  <div class="recipes">
+    <div *ngFor="let Recipe of recipes">
+      <h3>{{Recipe.title}}</h3>
+      <div class="mb-2 details-{{Recipe.id}} recipeDetails">
+        {{Recipe.ingredients}}
+      </div>
+      <div class="mb-3 details-{{Recipe.id}} recipeDetails">
+        {{Recipe.instructions}}
+      </div>
+      <button class="btn btn-info" (click)="toggleDetails(Recipe)">Toggle</button>
+      <button class="btn btn-warning" (click)="editRecipe(Recipe)">Edit</button>
+    </div>
+  </div>
+  <form *ngIf="selectedRecipe" class="inputHide">
+    <div class="form-group mt-3">
+      <input [(ngModel)]="selectedRecipe.title" type="text" name="title">
+    </div>
+    <div class="form-group mt-3">
+      <input [(ngModel)]="selectedRecipe.ingredients" type="text" name="ingredients">
+    </div>
+    <div class="form-group mt-3">
+      <input [(ngModel)]="selectedRecipe.instructions" type="text" name="instructions">
+    </div>
+    <button (click)="finishedEditing()" class="btn btn-success">Done</button>
+  </form>
+</div>
